@@ -9,17 +9,17 @@ CREATE TABLE department(
  department_id INTEGER AUTO_INCREMENT
 );
 
-INSERT INTO department(id, role)
+INSERT INTO department(role)
 VALUES 
-   (1,"Sales"),
-   (2,"Engineering"),
-   (3,"Finance"),
-   (4,"Legal");
+   ("Sales"),
+   ("Engineering"),
+   ("Finance"),
+   ("Legal");
 
 CREATE TABLE role(
   PRIMARY KEY (role_id),
   title VARCHAR(30),
-  salary DECIMAL(10,2),
+  salary VARCHAR(20),
   department_id INTEGER,
   role_id INTEGER AUTO_INCREMENT
 );
@@ -30,10 +30,10 @@ VALUES
   (2,"Salesperson", "$80,000"),
   (3,"Lead Engineer", "$150,000"),
   (4,"Software Engineer", "$120,000"),
-  (5. "Account Manager", "$160,000"),
-  (6. "Accountant", "$125,000"),
-  (7. "Legal Team Lead", "$250,000"),
-  (8. "Lawyer", "$190,000");
+  (5, "Account Manager", "$160,000"),
+  (6, "Accountant", "$125,000"),
+  (7, "Legal Team Lead", "$250,000"),
+  (8, "Lawyer", "$190,000");
 
 CREATE TABLE employee(
   PRIMARY KEY (id),
@@ -45,7 +45,9 @@ CREATE TABLE employee(
 );
 
 CREATE TABLE managers (
-  PRIMARY KEY (managers_id),
+  PRIMARY KEY (manager_id),
+  first_name VARCHAR(30),
+  last_name VARCHAR(30),
   manager VARCHAR(30),
   manager_id INTEGER AUTO_INCREMENT
 );

@@ -1,7 +1,26 @@
 {
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Muzan67/Employee-tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Muzan67/Employee-tracker/issues"
+  },
+  "homepage": "https://github.com/Muzan67/Employee-tracker#readme",
   "dependencies": {
     "console.table": "^0.10.0",
-    "inquirer": "^8.0.0",
+    "inquirer": "^8.2.4",
     "mysql2": "^2.3.3"
   }
 }

@@ -1,24 +1,25 @@
-INSERT INTO employee (id, first_name, last_name, manager_id) 
+INSERT INTO employee (first_name, last_name, manager_id) 
 VALUES 
-  (1,"John Doe", 1),
-  (2,"Mike Chan", 2),
-  (3,"Shley Rodriguez", 3),
-  (4,"Kevin Tupik", 4),
-  (5. "Kunal Singh", 5),
-  (6. "Malia Brown", 6),
-  (7. "Sarah Lourd", 7),
-  (8. "Tom Allen", 8);
+  ("John", "Doe", 1),
+  ("Mike", "Chan", 2),
+  ("Shley", "Rodriguez", 3),
+  ("Kevin", "Tupik", 4),
+  ("Kunal", "Singh", 5),
+  ("Malia", "Brown", 6),
+  ("Sarah", "Lourd", 7),
+  ("Tom", "Allen", 8);
 
-INSERT INTO manager (manager_id, first_name, last_name) 
+INSERT INTO managers (first_name, last_name) 
 VALUES 
-  (1,"null"),
-  (2,"John Doe"),
-  (3,"null"),
-  (4,"Ashley Rodriguez"),
-  (5. "null"),
-  (6. "Kunal Singh"),
-  (7. "null"),
-  (8. "Sarah Lourd");
+  ("null", "null"),
+  ("John", "Doe"),
+  ("null", "null"),
+  ("Ashley", "Rodriguez"),
+  ("null", "null"),
+  ("Kunal", "Singh"),
+  ("null", "null"),
+  ("Sarah", "Lourd");
 
 SELECT * FROM employee;
 SELECT * FROM managers;
+SELECT * FROM department;
