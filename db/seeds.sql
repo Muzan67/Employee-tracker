@@ -1,44 +1,15 @@
-INSERT INTO id (id, department_id)
+INSERT INTO employee (id, first_name, last_name, manager_id) 
 VALUES 
-  (1,"Sales"),
-  (2,"Engineering"),
-  (3,"Finance"),
-  (4,"Legal"),
-  
-INSERT INTO role (id, title_id) 
-VALUES
-  (1,"Sales Lead"),
-  (2,"Salesperson"),
-  (3,"Lead Engineer"),
-  (4,"Software Engineer"),
-  (5. "Account Manager"),
-  (6. "Accountant"),
-  (7. "Legal Team Lead"),
-  (8. "Lawyer");
+  (1,"John Doe", 1),
+  (2,"Mike Chan", 2),
+  (3,"Shley Rodriguez", 3),
+  (4,"Kevin Tupik", 4),
+  (5. "Kunal Singh", 5),
+  (6. "Malia Brown", 6),
+  (7. "Sarah Lourd", 7),
+  (8. "Tom Allen", 8);
 
-INSERT INTO salary (id, salary_id) 
-VALUES
-  (1,"$100,000"),
-  (2,"$80,000"),
-  (3,"$150,000"),
-  (4,"$120,000"),
-  (5. "$160,000"),
-  (6. "$125,000"),
-  (7. "$250,000"),
-  (8. "$190,000");
-
-INSERT INTO employee (id, name_id, ) 
-VALUES 
-  (1,"John Doe"),
-  (2,"Mike Chan"),
-  (3,"Shley Rodriguez"),
-  (4,"Kevin Tupik"),
-  (5. "Kunal Singh"),
-  (6. "Malia Brown"),
-  (7. "Sarah Lourd"),
-  (8. "Tom Allen");
-
-INSERT INTO manager (id, manager_id, ) 
+INSERT INTO manager (manager_id, first_name, last_name) 
 VALUES 
   (1,"null"),
   (2,"John Doe"),
@@ -48,3 +19,6 @@ VALUES
   (6. "Kunal Singh"),
   (7. "null"),
   (8. "Sarah Lourd");
+
+SELECT * FROM employee;
+SELECT * FROM managers;
