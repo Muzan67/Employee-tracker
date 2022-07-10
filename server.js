@@ -2,8 +2,8 @@
 const mysql = require('mysql2');
 // inquirer@^8.0.0
 const inquirer = require("inquirer");
-const consoleTables = require("console.table");
-const Connection = require('mysql2/typings/mysql/lib/Connection');
+const consoleTable = require("console.table");
+const connection = require('mysql2/typings/mysql/lib/Connection');
 const { getMaxListeners } = require('process');
 
 // Connect to database
@@ -108,7 +108,7 @@ const init = () => {
         .then((answers) => {
           switch (answers.init) {
         case "View All Employees":
-          allEmployee();
+          allEmployees();
           break;
 
         case "Which Department would you like to see Employees by Department":
@@ -117,6 +117,10 @@ const init = () => {
 
         case "View All Employees by Manager":
             allEmployeeByManager();
+          break;
+
+        case "Assign a Manager to an Employee":
+            updateManager();
           break;
 
         case "View All Roles":
@@ -227,4 +231,33 @@ const updateRole = () => {
         })
     })
 };
+
+const allManagers = () => {
+    connection.query(`SELECT Manager FROM Managers`, (err, res) => {
+            if(err) throw err;
+            console.log("\nAll MANAGERS\n");
+            console.table(res);
+            init();
+    })
+};
+
+const allManagers = () => {
+    connection.query(`SELECT Manager FROM Managers`, (err, res) => {
+            if(err) throw err;
+            console.log("\nAll MANAGERS\n");
+            console.table(res);
+            init();
+    })
+};
+
+const allManagers = () => {
+    connection.query(`SELECT Manager FROM Managers`, (err, res) => {
+            if(err) throw err;
+            console.log("\nAll MANAGERS\n");
+            console.table(res);
+            init();
+    })
+};
+
+
 init ()}
