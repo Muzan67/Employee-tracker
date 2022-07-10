@@ -1,10 +1,9 @@
 // Import and require mysql2
 const mysql = require('mysql2');
 // inquirer@^8.0.0
-const inquirer = require("inquirer");
-const consoleTable = require("console.table");
+const inquirer = require('inquirer');
+const cTable = require('console.table');
 const connection = require('mysql2/typings/mysql/lib/Connection');
-const { getMaxListeners } = require('process');
 
 // Connect to database
 const db = mysql.createConnection(
@@ -330,7 +329,7 @@ const allEmployeeByDepartment = () => {
 }
 
 
-addEmployee = () => {
+const addEmployee = () => {
     managers.push('none');
     inquirer
     .prompt([
