@@ -169,6 +169,7 @@ const allEmployeeByManager = () => {
         name: "manager",
         type: "list",
         message: "Choose A Manager? (Use arrow keys)",
+        choices: managers
     })
     .then((answer) => {
         connection.query(`SELECT first_name, last_name FROM employee Where manager_id = ${answer.manager};`, (err, res) => {
@@ -179,4 +180,51 @@ const allEmployeeByManager = () => {
     })
 };
 
+const updateManager = () => {
+    inquirer
+    .prompt([{
+        name: "employee",
+        type: "list",
+        message: "The Selected Employee Has No Direct Reports? (Use arrow keys)",
+        choices: employees
+    },
+    {
+        name: "manager",
+        type: "list",
+        message: "Assign Employee With a Direct Manager? (Use arrow keys)",
+        choices: managers
+    },
+    ])
+    .then((answer) => {
+        connection.query(`UPDATE employee SET assign manager_id = ${answer.manager}
+        WHERE id = ${answer.employee}`, (err, res) => {
+            if(err) throw err;
+            init()
+        })
+    })
+};
+
+const updateRole = () => {
+    inquirer
+    .prompt([{
+        name: "employee",
+        type: "list",
+        message: "What is The Name of The Role? (Use arrow keys)",
+        choices: employees
+    },
+    {
+        name: "role",
+        type: "list",
+        message: "Assign Employee With a New Role? (Use arrow keys)",
+        choices: roles
+    },
+    ])
+    .then((answer) => {
+        connection.query(`UPDATE employee SET new role_id = ${answer.role}
+        WHERE id = ${answer.employee}`, (err, res) => {
+            if(err) throw err;
+            init()
+        })
+    })
+};
 init ()}
