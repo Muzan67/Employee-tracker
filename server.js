@@ -4,6 +4,7 @@ const mysql = require('mysql2');
 const inquirer = require("inquirer");
 const consoleTables = require("console.table");
 const Connection = require('mysql2/typings/mysql/lib/Connection');
+const { getMaxListeners } = require('process');
 
 // Connect to database
 const db = mysql.createConnection(
@@ -12,7 +13,7 @@ const db = mysql.createConnection(
     // MySQL username,
     user: 'root',
     // {TODO: Add your MySQL password}
-    password: '',
+    password: 'password',
     database: 'employee_db'
   },
   console.log(`Connected to the inventory_db database.`)
@@ -34,7 +35,7 @@ const getRole = () => {
                 name: title,
                 value: id
             }
-            managers.push(newRole);
+            roles.push(newRole);
         }
         // console.log(managers)
         return managers;
@@ -80,6 +81,102 @@ const getManager = () => {
         return managers;
         // console.log(managers)
     });
+
+const init = () => {
+      getRole();
+      getEmployee();
+      getManager();
+    inquirer
+      .prompt({
+        name: "init",
+        type: "rawlist",
+        message: "What would you like to do? (Use arrow keys)",
+        choices: [
+            "View All Employees",
+            "Add Employee",
+            "Update Employee Role",
+            "Update Employee Manager",
+            "View All Roles",
+            "Add Role",
+            "Remove Role",
+            "View All Departments",
+            "Add Department",
+            "Quit",
+           "(Move up and down to reveal more choices)",
+        ],
+    })
+        .then((answers) => {
+          switch (answers.init) {
+        case "View All Employees":
+          allEmployee();
+          break;
+
+        case "Which Department would you like to see Employees by Department":
+          allEmployeeByDepartment();
+          break;
+
+        case "View All Employees by Manager":
+            allEmployeeByManager();
+          break;
+
+        case "View All Roles":
+            allRoles();
+          break;
+
+        case "Add Employee":
+            addEmployee();
+          break;
+
+        case "Add Role":
+            addRole();
+          break;
+
+        case "View All Department":
+            allDepartment();
+          break;
+
+        case "Add Department":
+            removeDepartment();
+          break;
+
+        case "Remove Department":
+            addDepartment();
+          break;
+
+        case "View Total Ustilized Budget By Department":
+          allBudget();
+        break;
+
+        case "Update Employee Role":
+            updateRole();
+          break;
+
+        case "Remove Employee":
+            removeEmployee();
+          break;
+
+        case "Quit":
+          connection.end();
+          break;
+      }
+  });
+
 };
 
-init ()
+const allEmployeeByManager = () => {
+    inquirer
+    .prompt({
+        name: "manager",
+        type: "list",
+        message: "Choose A Manager? (Use arrow keys)",
+    })
+    .then((answer) => {
+        connection.query(`SELECT first_name, last_name FROM employee Where manager_id = ${answer.manager};`, (err, res) => {
+            if(err) throw err;
+            console.table(res);
+            init()
+        })
+    })
+};
+
+init ()}
