@@ -127,6 +127,10 @@ const init = () => {
             allRoles();
           break;
 
+          case "View All Managers":
+            allManagers();
+          break;
+
         case "Add Employee":
             addEmployee();
           break;
@@ -241,7 +245,7 @@ const allManagers = () => {
     })
 };
 
-const allManagers = () => {
+const allEmployees = () => {
     connection.query(`SELECT Manager FROM Managers`, (err, res) => {
             if(err) throw err;
             console.log("\nAll MANAGERS\n");
@@ -250,7 +254,7 @@ const allManagers = () => {
     })
 };
 
-const allManagers = () => {
+const allRoles = () => {
     connection.query(`SELECT Manager FROM Managers`, (err, res) => {
             if(err) throw err;
             console.log("\nAll MANAGERS\n");
