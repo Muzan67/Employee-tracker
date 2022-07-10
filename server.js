@@ -171,6 +171,30 @@ const init = () => {
 
 };
 
+const updateRole = () => {
+    inquirer
+    .prompt([{
+        name: "employee",
+        type: "list",
+        message: "What is The Name of The Role? (Use arrow keys)",
+        choices: employees
+    },
+    {
+        name: "role",
+        type: "list",
+        message: "Assign Employee With a New Role? (Use arrow keys)",
+        choices: roles
+    },
+    ])
+    .then((answer) => {
+        connection.query(`UPDATE employee SET new role_id = ${answer.role}
+        WHERE id = ${answer.employee}`, (err, res) => {
+            if(err) throw err;
+            init()
+        })
+    })
+};
+
 const allEmployeeByManager = () => {
     inquirer
     .prompt({
@@ -212,27 +236,21 @@ const updateManager = () => {
     })
 };
 
-const updateRole = () => {
-    inquirer
-    .prompt([{
-        name: "employee",
-        type: "list",
-        message: "What is The Name of The Role? (Use arrow keys)",
-        choices: employees
-    },
-    {
-        name: "role",
-        type: "list",
-        message: "Assign Employee With a New Role? (Use arrow keys)",
-        choices: roles
-    },
-    ])
-    .then((answer) => {
-        connection.query(`UPDATE employee SET new role_id = ${answer.role}
-        WHERE id = ${answer.employee}`, (err, res) => {
+const allRoles = () => {
+    connection.query(`SELECT title FROM Role`, (err, res) => {
             if(err) throw err;
-            init()
-        })
+            console.log("\nAll MANAGERS\n");
+            console.table(res);
+            init();
+    })
+};
+
+const allEmployees = () => {
+    connection.query(roleCheck, (err, res) => {
+            if (err) throw err;
+            console.log("\nAll Employees\n");
+            console.table(res);
+            init();
     })
 };
 
@@ -245,23 +263,56 @@ const allManagers = () => {
     })
 };
 
-const allEmployees = () => {
-    connection.query(`SELECT Manager FROM Managers`, (err, res) => {
-            if(err) throw err;
-            console.log("\nAll MANAGERS\n");
-            console.table(res);
-            init();
+const allEmployeeByDepartment = () => {
+    inquirer
+    .prompt({
+        name: "department",
+        type: "rawlist",
+        message: "Choose a Department? (Use arrow keys)",
+        choices: ["Sales", "Engineering", "Finance", "Legal"]
     })
-};
+    .then(answer) => {
+       if(answer.departments === "Sales") {
+        connection.query(`SELECT employee.first_name, employee.last_name, name FROM employee
+                          JOIN role ON employee.role_id = role.role.id
+                          JoIN department ON role.department_id = department.department_id and department.role = "Sales"`, (err, res) => {
+        console.log("\nSales\n");
+        if (err) throw err;
+        console.table(res);
+        init();
+       })
+    }
+    else if (answer.departments === "Finance") {
+        connection.query(`SELECT employee.first_name, employee.last_name, name FROM employee
+                          JOIN role ON employee.role_id = role.role.id
+                          JoIN department ON role.department_id = department.department_id and department.role = "Finance"`, (err, res) => {
+        console.log("\nFinance\n");
+        if (err) throw err;
+        console.table(res);
+        init();
+       })
+    }
+    else if (answer.departments === "Finance") {
+        connection.query(`SELECT employee.first_name, employee.last_name, name FROM employee
+                          JOIN role ON employee.role_id = role.role.id
+                          JoIN department ON role.department_id = department.department_id and department.role = "Finance"`, (err, res) => {
+        console.log("\nFinance\n");
+        if (err) throw err;
+        console.table(res);
+        init();
+       })
+    }
+    else if (answer.departments === "Finance") {
+        connection.query(`SELECT employee.first_name, employee.last_name, name FROM employee
+                          JOIN role ON employee.role_id = role.role.id
+                          JoIN department ON role.department_id = department.department_id and department.role = "Finance"`, (err, res) => {
+        console.log("\nFinance\n");
+        if (err) throw err;
+        console.table(res);
+        init();
+       })
+    }
 
-const allRoles = () => {
-    connection.query(`SELECT Manager FROM Managers`, (err, res) => {
-            if(err) throw err;
-            console.log("\nAll MANAGERS\n");
-            console.table(res);
-            init();
-    })
 };
-
 
 init ()}
