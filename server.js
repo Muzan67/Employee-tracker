@@ -3,6 +3,7 @@ const mysql = require('mysql2');
 // inquirer@^8.0.0
 const inquirer = require('inquirer');
 const cTable = require('console.table');
+const dotenv = require('dotenv');
 
 // Connect to database
 const connection = mysql.createConnection(
@@ -11,7 +12,7 @@ const connection = mysql.createConnection(
     // MySQL username,
     user: 'root',
     // {TODO: Add your MySQL password}
-    password: 'password',
+    password: 'Papooz@10128!',
     database: 'employee_db'
   },
   console.log(`Connected to the inventory_db database.`)
@@ -81,12 +82,9 @@ const getManager = () => {
     })
 };
 
-
 // initiate prompts
 const init = () => {
-    //   getRole();
-    //   getEmployee();
-    //   getManager();
+    
     inquirer
       .prompt({
         name: "init",
@@ -112,6 +110,7 @@ const init = () => {
         .then((answers) => {
             console.log('answers ---> ' + answers)
           switch (answers.init) {
+
         case "View All Employees":
           allEmployees();
           break;
@@ -183,13 +182,25 @@ const updateRole = () => {
         name: "employee",
         type: "list",
         message: "What is The Name of The Role? (Use arrow keys)",
-        choices: employees
+        choices: [
+            "Sales Lead",
+            "Salesperson",
+            "Lead Engineer",
+            "Software Engineer",
+            "Account Manager", 
+            "Accountant",
+            "Legal Team Lead",
+            "Lawyer",
+        ],
     },
     {
         name: "role",
         type: "list",
         message: "Assign Employee With a New Role? (Use arrow keys)",
-        choices: roles
+        choices: [
+            "Assign New Role",
+            "Do Not Assign New Role",
+        ],
     },
     ])
     .then((answer) => {
@@ -208,7 +219,13 @@ const allEmployeeByManager = () => {
         name: "manager",
         type: "list",
         message: "Choose A Manager? (Use arrow keys)",
-        choices: managers
+        choices:[
+            "null",
+            "John Doe", 
+            "Ashley Rodriguez",
+            "Kunal Singh",
+            "Sarah Lourd",
+        ],
     })
     .then((answer) => {
         connection.query(`SELECT first_name, last_name FROM employee Where manager_id = ${answer.manager};`, (err, res) => {
@@ -226,13 +243,22 @@ const updateManager = () => {
         name: "employee",
         type: "list",
         message: "The Selected Employee Has No Direct Reports? (Use arrow keys)",
-        choices: employees
+        choices:[
+            "Assign Direct Reports",
+            "Do Not Assign Direct Report", 
+        ],
     },
     {
         name: "manager",
         type: "list",
         message: "Assign Employee With a Direct Manager? (Use arrow keys)",
-        choices: managers
+        choices:[
+            "null",
+            "John Doe", 
+            "Ashley Rodriguez",
+            "Kunal Singh",
+            "Sarah Lourd",
+        ],
     },
     ])
     .then((answer) => {
@@ -254,7 +280,7 @@ const allRoles = () => {
 };
 
 const allEmployees = () => {
-    connection.query(roleCheck, (err, res) => {
+    connection.query(`SELECT title FROM Employee`, (err, res) => {
             if (err) throw err;
             console.log("\nAll Employees\n");
             console.table(res);
@@ -278,7 +304,12 @@ const allEmployeeByDepartment = () => {
         name: "department",
         type: "rawlist",
         message: "Choose a Department? (Use arrow keys)",
-        choices: ["Sales", "Engineering", "Finance", "Legal"]
+        choices: [
+            "Sales", 
+            "Engineering", 
+            "Finance", 
+            "Legal",
+        ],
         }
     ])
     .then((answer) => {
@@ -347,13 +378,28 @@ const addEmployee = () => {
         name: "role",
         type: "input",
         message: "What is the employee's role?",
-        choices: roles
+        choices: [
+            "Sales Lead",
+            "Salesperson",
+            "Lead Engineer",
+            "Software Engineer",
+            "Account Manager", 
+            "Accountant",
+            "Legal Team Lead",
+            "Lawyer",
+        ],
     },
     {
         name: "manager",
         type: "input",
         message: "Who is the employee's manager?",
-        choices: managers
+        choices:[
+            "null",
+            "John Doe", 
+            "Ashley Rodriguez",
+            "Kunal Singh",
+            "Sarah Lourd",
+        ],
     },
 ])
     .then((answer) => {
@@ -379,7 +425,16 @@ const removeEmployee = () => {
         name: "employee",
         type: "list",
         message: "Which employee do you want to remove? (Use arrow keys)",
-        choices: employees
+        choices:[
+            "John Doe",
+            "Mike Chan", 
+            "Shirley Rodriguez",
+            "Kevin Tupik",
+            "Kunal Singh",
+            "Malia Brown",
+            "Sarah Lourd",
+            "Tom Allen",
+        ],
     })
     .then((answer) => {
         connection.query(`SELECT employee.first_name, employee.last_name, name FROM employee

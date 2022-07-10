@@ -24,7 +24,7 @@ CREATE TABLE role(
   role_id INTEGER AUTO_INCREMENT
 );
 
-INSERT INTO role (department_id, title, salary) 
+INSERT INTO role_id (department_id, title, salary) 
 VALUES
   (1,"Sales Lead", "$100,000" ),
   (2,"Salesperson", "$80,000"),
