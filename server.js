@@ -90,7 +90,7 @@ const init = () => {
     inquirer
       .prompt({
         name: "init",
-        type: "rawlist",
+        type: "list",
         message: "What would you like to do? (Use arrow keys)",
         choices: [
             "View All Employees",
@@ -110,6 +110,7 @@ const init = () => {
 
     // Switch Statment for Employees, Managers, Departments, Roles, Budget
         .then((answers) => {
+            console.log('answers ---> ' + answers)
           switch (answers.init) {
         case "View All Employees":
           allEmployees();
