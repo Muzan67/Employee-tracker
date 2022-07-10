@@ -3,10 +3,9 @@ const mysql = require('mysql2');
 // inquirer@^8.0.0
 const inquirer = require('inquirer');
 const cTable = require('console.table');
-const connection = require('mysql2/typings/mysql/lib/Connection');
 
 // Connect to database
-const db = mysql.createConnection(
+const connection = mysql.createConnection(
   {
     host: 'localhost',
     // MySQL username,
@@ -85,9 +84,9 @@ const getManager = () => {
 
 // initiate prompts
 const init = () => {
-      getRole();
-      getEmployee();
-      getManager();
+    //   getRole();
+    //   getEmployee();
+    //   getManager();
     inquirer
       .prompt({
         name: "init",
@@ -391,6 +390,5 @@ const removeEmployee = () => {
        console.log(answer)
     })
 }
-
 
 init ()
