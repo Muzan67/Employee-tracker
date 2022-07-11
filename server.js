@@ -82,30 +82,27 @@ const init = () => {
 
 const selectEmployees = () => {
     connection.query(
-'SELECT E.id, E.first_name, E.last_name, R.title, D.name AS department, R.salary, CONCAT(M.first_name,' ', M.last_name) AS manager FROM employee E JOIN role R ON E.role_id = R.id JOIN department D ON R.department_id = D.id LEFT JOIN employee M ON E.manager_id = M.id;',
+"SELECT E.id, E.first_name, E.last_name, R.title, D.name AS department, R.salary, CONCAT(M.first_name,' ', M.last_name) AS manager FROM employee E JOIN role R ON E.role_id = R.id JOIN department D ON R.department_id = D.id LEFT JOIN employee M ON E.manager_id = M.id;",
     (err, res) => {
         console.table(res);
         init();
-    }
-    )
+    })
 };
 
 const selectRoles = () => {
-    connection.query('SELECT * FROM role;',
+    connection.query("SELECT * FROM role;",
     (err, res) => {
         console.table(res);
         init();
-    }
-    )
+    })
 };
 
 const selectDepartments = () => {
-    connection.query('SELECT * FROM department;',
+    connection.query("SELECT * FROM department;",
     (err, res) => {
         console.table(res);
         init();
-    }
-    )
+    })
 };
 
 // const selectManagers = () => {
@@ -113,8 +110,7 @@ const selectDepartments = () => {
 //     (err, res) => {
 //         console.table(res);
 //         init();
-//     }
-//     )
+//     })
 // };
 
 const promptAddEmployee = () => {
@@ -155,7 +151,7 @@ const promptAddEmployee = () => {
                 }
             }
         },
-    {
+        {
         name: "lastName",
         type: "input",
         message: "What is your employees last name?",
@@ -168,20 +164,20 @@ const promptAddEmployee = () => {
                 }
             }
         },
-    {
+        {
         name: "role",
         type: "list",
         message: "What is your employees role?",
         choices: titleChoices
-    },
-    {
+        },
+        {
         name: "manager",
         type: "list",
         message: "Who is your employees manager?",
         choices: managerChoices
-    },
-    ])
-    .then(({ firstName, lastName, role, manager }) => {
+        },
+        ])
+        .then(({ firstName, lastName, role, manager }) => {
         const query = connection.query(
             'INSERT INTO employee SET',
             {
@@ -221,7 +217,7 @@ const promptAddDepartment = () => {}
     .then(name => {
     connection.promise().query("INSERT INTO department SET", name);
     selectDepartments();
-  })
+})
 
 const promptAddRole = () => {
     return connection.promise().query(
@@ -235,7 +231,7 @@ const promptAddRole = () => {
             name: name,
             value: id
         }));
-        inquirer
+    inquirer
     .prompt([
         {
         name: "title",
@@ -286,75 +282,77 @@ const promptAddRole = () => {
                 if (err) throw err;
             }
         )
-    }).then(() => selectRoles())
-})
+    })
+    .then(() => selectRoles())
+    })
 }
 
 const promptUpdateRole = () => {
     return connection.promise().query(
         "SELECT role.id, role.title, role.salary, role.department_id FROM role;"
     )
-    .then(([departments]) => {
-        let departmentChoices = departments.map(({
+    .then(([roles]) => {
+        let rolesChoices = roles.map(({
             id,
-            name
+            title
         }) => ({
-            name: name,
+            name: title,
             value: id
         }));
-        inquirer
+    inquirer
     .prompt([
         {
-        name: "title",
-        type: "input",
-        message: "Enter the name of your title?",
-        validate: titleName => {
-            if (titleName) {
-                if (titleName) {
-                    return true;
-                } else {
-                    console.log("Please enter the title of your name?");
-                    return false;
-                }
-            }
-        }
-    },
-    {
-        name: "department",
+        name: "role",
         type: "list",
-        message: "Enter the name of your title?",
-        choices: departmentChoices
-    },
-    {
-        name: "salary",
-        type: "input",
-        message: "Enter your salary?",
-        validate: salary => {
-            if (salary) {
-                if (salary) {
-                    return true;
-                } else {
-                    console.log("Please enter the name of your department?");
-                    return false;
+        message: "Which role do you want to update?",
+        choices: roleChoices
+        }
+    ])
+    .then(role => {
+        console.log(role);
+        inquirer.prompt(
+            [{
+                name: "title",
+                type: "input",
+                message: "Enter the name of your title?",
+                validate: titleName => {
+                    if (titleName) {
+                        return true;
+                    } else {
+                    console.log("Please enter your title name?");
+                        return false;
+                    }
+                }
+            },
+            {
+                name: "salary",
+                type: "input",
+                message: "Enter tyour salary?",
+                validate: salary => {
+                    if (salary) {
+                        return true;
+                    } else {
+                    console.log("Please enter your salary?");
+                        return false;
                 }
             }
-        }
-    }]
+        }]
     )
-    .then(({ title, department, salary }) => {
+    .then(({ title, salary }) => {
         const query = connection.query(
-            'INSERT INTO role SET',
-            {
-                title: title,
-                department_id: department,
-                salary: salary
-            },
+            'UPDATE role SET title =?, salary =?, Where id =?',
+            [
+                title,
+                salary,
+                role.role
+            ],
             function (err, res) {
                 if (err) throw err;
-            }
-        )
-    }).then(() => selectRoles())
-})
-}
+            })
+        }).then(() => init())
+    })
+});
+
+};
 
 init ()
