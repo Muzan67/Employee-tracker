@@ -6,15 +6,7 @@ USE employee_db;
 CREATE TABLE department(
  id INT AUTO_INCREMENT PRIMARY KEY,
  name VARCHAR(30) UNIQUE NOT NULL
- department_id INTEGER AUTO_INCREMENT
 );
-
-INSERT INTO department (role)
-VALUES 
-   ("Sales"),
-   ("Engineering"),
-   ("Finance"),
-   ("Legal");
 
 CREATE TABLE role (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -25,7 +17,7 @@ CREATE TABLE role (
 );
 
 CREATE TABLE employee (
-  PRIMARY KEY (id),
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(30),
   last_name VARCHAR(30),
   role_id INTEGER,
@@ -38,5 +30,5 @@ CREATE TABLE managers (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(30),
   last_name VARCHAR(30),
-  manager VARCHAR(30),
+  manager VARCHAR(30)
 );
