@@ -18,9 +18,9 @@ const connection = mysql.createConnection(
   console.log(`Connected to the inventory_db database.`)
 );
 
-var roles = [];
-var employees = [];
-var managers = [];
+// var roles = [];
+// var employees = [];
+// var managers = [];
 
 // GET Role
 const getRole = () => {
