@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 // inquirer@^8.0.0
 const inquirer = require('inquirer');
 const cTable = require('console.table');
-const dotenv = require('dotenv');
+require('dotenv').config()
 
 // Connect to database
 const connection = mysql.createConnection(
