@@ -116,7 +116,89 @@ const selectDepartments = () => {
 //     }
 //     )
 // };
- 
+
+const promptAddEmployee = () => {
+    return connection.promise().query(
+        "SELECT role.id, role.title FROM roles;"
+    )
+    .then(([employees]) => {
+        let titleChoices = employees.map(({
+            id,
+            title
+        }) => ({
+            name: title,
+            value: id
+        }));
+    connection.promise().query(
+        "SELECT employee.id, CONCAT(employee.first_name, ' ' ,employee.last_name) AS manager FROM employee;"
+        )
+        .then(([managers]) => {
+            let managerChoices = managers.map(({
+                id,
+                manager
+            }) => ({
+                name: manager,
+                value: id
+            }));
+        inquirer
+    .prompt([
+        {
+        name: "firstName",
+        type: "input",
+        message: "What is your employees first name?",
+        validate: firstName => {
+            if (firstName) {
+                    return true;
+                } else {
+                    console.log("Please enter the employees first name!");
+                    return false;
+                }
+            }
+        },
+    {
+        name: "lastName",
+        type: "input",
+        message: "What is your employees last name?",
+        validate: lastName => {
+            if (lastName) {
+                    return true;
+                } else {
+                    console.log("Please enter the employees first name!");
+                    return false;
+                }
+            }
+        },
+    {
+        name: "role",
+        type: "list",
+        message: "What is your employees role?",
+        choices: titleChoices
+    },
+    {
+        name: "manager",
+        type: "list",
+        message: "Who is your employees manager?",
+        choices: managerChoices
+    },
+    ])
+    .then(({ firstName, lastName, role, manager }) => {
+        const query = connection.query(
+            'INSERT INTO employee SET',
+            {
+                firstName: firstName,
+                lastName: lastName,
+                role_id: role,
+                manager_id: manager
+            },
+            function (err, res) {
+                if (err) throw err;
+                console.log({ role, manager })
+            })
+            }).then(() => selectEmployees())
+        })
+    })
+}
+
 const promptAddDepartment = () => {}
     inquirer
     .prompt([
@@ -208,5 +290,71 @@ const promptAddRole = () => {
 })
 }
 
+const promptUpdateRole = () => {
+    return connection.promise().query(
+        "SELECT role.id, role.title, role.salary, role.department_id FROM role;"
+    )
+    .then(([departments]) => {
+        let departmentChoices = departments.map(({
+            id,
+            name
+        }) => ({
+            name: name,
+            value: id
+        }));
+        inquirer
+    .prompt([
+        {
+        name: "title",
+        type: "input",
+        message: "Enter the name of your title?",
+        validate: titleName => {
+            if (titleName) {
+                if (titleName) {
+                    return true;
+                } else {
+                    console.log("Please enter the title of your name?");
+                    return false;
+                }
+            }
+        }
+    },
+    {
+        name: "department",
+        type: "list",
+        message: "Enter the name of your title?",
+        choices: departmentChoices
+    },
+    {
+        name: "salary",
+        type: "input",
+        message: "Enter your salary?",
+        validate: salary => {
+            if (salary) {
+                if (salary) {
+                    return true;
+                } else {
+                    console.log("Please enter the name of your department?");
+                    return false;
+                }
+            }
+        }
+    }]
+    )
+    .then(({ title, department, salary }) => {
+        const query = connection.query(
+            'INSERT INTO role SET',
+            {
+                title: title,
+                department_id: department,
+                salary: salary
+            },
+            function (err, res) {
+                if (err) throw err;
+            }
+        )
+    }).then(() => selectRoles())
+})
+}
 
 init ()
