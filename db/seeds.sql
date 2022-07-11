@@ -1,23 +1,23 @@
 INSERT INTO employee (first_name, last_name, role_id, manager_id) 
 VALUES 
-  ("John", "Doe", 1, "null"),
+  ("John", "Doe", 1, 1),
   ("Mike", "Chan", 2, 2),
-  ("Shirley", "Rodriguez", 3, "null"),
+  ("Shirley", "Rodriguez", 3, 3),
   ("Kevin", "Tupik", 4, 4),
-  ("Kunal", "Singh", 5, "null"),
+  ("Kunal", "Singh", 5, 5),
   ("Malia", "Brown", 6, 6),
-  ("Sarah", "Lourd", 7, "null"), 
-  ("Tom", "Allen", 8, "null");
+  ("Sarah", "Lourd", 7, 7), 
+  ("Tom", "Allen", 8, 8);
 
 INSERT INTO managers (first_name, last_name, manager_id) 
 VALUES 
-  ("null", "null", 1),
+  ("Alex", "Vega", 1),
   ("John", "Doe", 2),
-  ("null", "null", 3),
+  ("James", "Carter", 3),
   ("Ashley", "Rodriguez", 4),
-  ("null", "null", 5),
+  ("Brian", "Art", 5),
   ("Kunal", "Singh", 6),
-  ("null", "null", 7),
+  ("Jamie", "Oliver", 7),
   ("Sarah", "Lourd", 8);
   
 INSERT INTO role (department_id, title, salary) 
