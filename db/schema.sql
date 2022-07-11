@@ -30,5 +30,5 @@ CREATE TABLE managers (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(30),
   last_name VARCHAR(30),
-  manager VARCHAR(30),
+  manager VARCHAR(30)
 );
