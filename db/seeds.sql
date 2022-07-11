@@ -31,7 +31,14 @@ VALUES
   (7, "Legal Team Lead", "$250,000"),
   (8, "Lawyer", "$190,000");
 
-SELECT * FROM employee;
-SELECT * FROM managers;
-SELECT * FROM department;
-SELECT * FROM role;
+INSERT INTO department (title)
+VALUES 
+   ("Sales"),
+   ("Engineering"),
+   ("Finance"),
+   ("Legal");
+
+-- SELECT * FROM employee;
+-- SELECT * FROM managers;
+-- SELECT * FROM department;
+-- SELECT * FROM role;
