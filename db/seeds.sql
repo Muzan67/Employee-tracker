@@ -1,24 +1,24 @@
-INSERT INTO employee (first_name, last_name, manager_id) 
+INSERT INTO employee (first_name, last_name, role_id, manager_id) 
 VALUES 
-  ("John", "Doe", 1),
-  ("Mike", "Chan", 2),
-  ("Shirley", "Rodriguez", 3),
-  ("Kevin", "Tupik", 4),
-  ("Kunal", "Singh", 5),
-  ("Malia", "Brown", 6),
-  ("Sarah", "Lourd", 7),
-  ("Tom", "Allen", 8);
+  ("John", "Doe", 1, "null"),
+  ("Mike", "Chan", 2, 2),
+  ("Shirley", "Rodriguez", 3, "null"),
+  ("Kevin", "Tupik", 4, 4),
+  ("Kunal", "Singh", 5, "null"),
+  ("Malia", "Brown", 6, 6),
+  ("Sarah", "Lourd", 7, "null"), 
+  ("Tom", "Allen", 8, "null");
 
-INSERT INTO managers (first_name, last_name) 
+INSERT INTO managers (first_name, last_name, manager_id) 
 VALUES 
-  ("null", "null"),
-  ("John", "Doe"),
-  ("null", "null"),
-  ("Ashley", "Rodriguez"),
-  ("null", "null"),
-  ("Kunal", "Singh"),
-  ("null", "null"),
-  ("Sarah", "Lourd");
+  ("null", "null", 1),
+  ("John", "Doe", 2),
+  ("null", "null", 3),
+  ("Ashley", "Rodriguez", 4),
+  ("null", "null", 5),
+  ("Kunal", "Singh", 6),
+  ("null", "null", 7),
+  ("Sarah", "Lourd", 8);
   
 INSERT INTO role (department_id, title, salary) 
 VALUES
@@ -31,13 +31,11 @@ VALUES
   (7, "Legal Team Lead", "$250,000"),
   (8, "Lawyer", "$190,000");
 
-INSERT INTO department (title)
+INSERT INTO department (name)
 VALUES 
    ("Sales"),
    ("Engineering"),
    ("Finance"),
    ("Legal");
 
-SELECT * FROM employee;
-SELECT * FROM department;
-SELECT * FROM role;
+
