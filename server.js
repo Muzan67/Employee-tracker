@@ -10,10 +10,10 @@ const connection = mysql.createConnection(
   {
     host: 'localhost',
     // MySQL username,
-    user: 'root',
+    user: process.env.DB_USER,
     // {TODO: Add your MySQL password}
-    password: 'Papooz@10128!',
-    database: 'employee_db'
+    password: process.env.DB_PW,
+    database: process.env.DB_NAME
   },
   console.log(`Connected to the inventory_db database.`)
 );
@@ -90,7 +90,7 @@ const init = () => {
     inquirer
       .prompt({
         name: "init",
-        type: "rawlist",
+        type: "list",
         message: "What would you like to do? (Use arrow keys)",
         choices: [
             "View All Employees",
@@ -219,7 +219,7 @@ const addRole = () => {
     .prompt([
         {
         name: "department",
-        type: "rawlist",
+        type: "list",
         message: "Choose a Department? (Use arrow keys)",
         choices: ["Sales", "Engineering", "Finance", "Legal"]
         }
@@ -276,7 +276,7 @@ const addDepartment = () => {
     .prompt([
         {
         name: "department",
-        type: "rawlist",
+        type: "list",
         message: "Choose a Department? (Use arrow keys)",
         choices: ["Sales Lead", "Sales Person", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead", "Lawyer"]
         }
@@ -378,14 +378,14 @@ const updateRole = () => {
     .prompt([{
         name: "employee",
         type: "list",
-        message: "What is The Name of The Role? (Use arrow keys)",
+        message: "What is The New Role You Would Like to Assign? (Use arrow keys)",
         choices: employees
     },
     {
         name: "role",
         type: "list",
         message: "Assign Employee With a New Role? (Use arrow keys)",
-        choices: roles
+        choices: ["Yes", "No"]
     },
     ])
     .then((answer) => {
