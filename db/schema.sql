@@ -9,39 +9,30 @@ CREATE TABLE department(
  department_id INTEGER AUTO_INCREMENT
 );
 
-INSERT INTO department(role)
+INSERT INTO department (role)
 VALUES 
    ("Sales"),
    ("Engineering"),
    ("Finance"),
    ("Legal");
 
-CREATE TABLE role(
+CREATE TABLE role (
   PRIMARY KEY (role_id),
   title VARCHAR(30),
   salary VARCHAR(20),
   department_id INTEGER,
-  role_id INTEGER AUTO_INCREMENT
+  role_id INTEGER AUTO_INCREMENT,
+  CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE SET NULL
 );
 
-INSERT INTO role_id (department_id, title, salary) 
-VALUES
-  (1,"Sales Lead", "$100,000" ),
-  (2,"Salesperson", "$80,000"),
-  (3,"Lead Engineer", "$150,000"),
-  (4,"Software Engineer", "$120,000"),
-  (5, "Account Manager", "$160,000"),
-  (6, "Accountant", "$125,000"),
-  (7, "Legal Team Lead", "$250,000"),
-  (8, "Lawyer", "$190,000");
-
-CREATE TABLE employee(
+CREATE TABLE employee (
   PRIMARY KEY (id),
   first_name VARCHAR(30),
   last_name VARCHAR(30),
-  role_id INTEGER NULL,
-  manager_id INTEGER NULL,
-  id INTEGER AUTO_INCREMENT
+  role_id INTEGER,
+  manager_id INTEGER,
+  CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE SET NULL,
+  CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE SET NULL
 );
 
 CREATE TABLE managers (
