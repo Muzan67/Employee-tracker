@@ -11,5 +11,6 @@ Design the database schema as shown in the following image:
 
 ![Database schema includes tables labeled “employee,” role,” and “department.”](./Assets/12-sql-homework-demo-01.png)
 
-## Credits
+# Sample image
+![image](https://user-images.githubusercontent.com/102841726/178400408-e242df1c-7b40-46b8-bb5a-6a2384e6b052.png)
 
