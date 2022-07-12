@@ -15,12 +15,12 @@ const connection = mysql.createConnection(
     password: process.env.DB_PW,
     database: process.env.DB_NAME
   },
-  console.log(`Connected to the inventory_db database.`)
+  console.log(`Connected to the employee_db database.`)
 );
 
-// var roles = [];
-// var employees = [];
-// var managers = [];
+var roles = [];
+var employees = [];
+var managers = [];
 
 // GET Role
 const getRole = () => {
@@ -37,7 +37,7 @@ const getRole = () => {
             roles.push(newRole);
         }
         // console.log(managers)
-        return managers;
+        return roles;
         // console.log(managers)
     });
 };
@@ -144,7 +144,7 @@ const init = () => {
 };
 
 const allEmployees = () => {
-    connection.query(roleCheck, (err, res) => {
+    connection.query(employeeCheck, (err, res) => {
             if (err) throw err;
             console.log("\nAll Employees\n");
             console.table(res);
@@ -162,7 +162,7 @@ const allRoles = () => {
 };
 
 const allDepartments = () => {
-    connection.query(roleCheck, (err, res) => {
+    connection.query(departmentCheck, (err, res) => {
             if (err) throw err;
             console.log("\nAll Departments\n");
             console.table(res);
@@ -396,5 +396,10 @@ const updateRole = () => {
         })
     })
 };
+
+connection.connect((err) => {
+       if (err) throw err;
+       console.log('Live')
+   });
 
 init ()

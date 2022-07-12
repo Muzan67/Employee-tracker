@@ -22,7 +22,7 @@ VALUES
   
 INSERT INTO role (department_id, title, salary) 
 VALUES
- INDEX role_ind (role_id)
+  INDEX role_ind (role_id)
   (1,"Sales Lead", "$100,000"),
   (2,"Sales Person", "$80,000"),
   (3,"Lead Engineer", "$150,000"),
